@@ -26,10 +26,10 @@ void print_fight_1(){
     printf(";     xxxxxxxxx              xxxxxxxxxx                        \n");
     printf(";   xxx        xx          xxx       xxxxx                     \n");
     printf(";   xx           x        xxx           xxx                    \n");
-    printf(";   xx            x        xx             xx                   \n");
-    printf(";   x          xxxx         xxx           xx                   \n");
-    printf(";   x         xx  x        xx  x          xx                   \n");
-    printf(";   x            xx        x   xx        xx                    \n");
-    printf(";   x          x          xx   x       xxx                     \n");
+    printf(";  xxx            x        xx             xx                   \n");
+    printf(";  xx          xxxx         xxx           xx                   \n");
+    printf(";  xx         xx  x        xx  x          xx                   \n");
+    printf(";  xx            xx        x   xx        xx                    \n");
+    printf(";  xx          x          xx   x       xxx                     \n");
     printf(";   xxx      xxx           xx      xxxxx                       \n");
 }
