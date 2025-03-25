@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "boxeador.h"
 
+//function to simulate a fight between two boxers
 void fight(boxeador *box1, boxeador *box2){
     box1->life = 3;
     box2->life = 3;
@@ -18,6 +19,7 @@ void fight(boxeador *box1, boxeador *box2){
         }
         printf("\n");
 
+        //menu of options
         printf("1. ATTACK\n");
         printf("2. DEFEND\n");
         printf("3. DODGE\n");
@@ -38,4 +40,3 @@ void fight(boxeador *box1, boxeador *box2){
         }
     }
 }
-
