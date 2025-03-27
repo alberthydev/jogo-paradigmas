@@ -7,7 +7,7 @@ void print_fight_1();
 
 // CANVAS 32x62
 
-void draw_box() {
+void drawMenu() {
     int height = 32;
     int width = 62;
     int start_x = 0;
@@ -28,7 +28,7 @@ void draw_box() {
     mvaddch(start_y + height - 1, start_x + width - 1, '+');  // Canto inferior direito
 }
 
-void draw_text_centered(const char* text, int y, int width) {
+void menuTextCentered(const char* text, int y, int width) {
     int text_len = strlen(text);
     int start_x = (width - text_len) / 2;
     mvprintw(y, start_x, "%s", text);
@@ -93,8 +93,8 @@ void fight_sprite_2(){
     printw(";                                                              \n");
     printw(";                                 mmmmmmmmmmm                  \n");
     printw(";                                mmmmmmmmmmmmmm                \n");
-    printw(";                              mmmmmmmmmmmmmmmmmmm             \n");
-    printw(";                              mmmmmmmmmmmmmmmmmm              \n");
+    printw(";                             mmmmmmmmmmmmmmmmmmmm             \n");
+    printw(";                             mmmmmmmmmmmmmmmmmm               \n");
     printw(";                             mmmm       mmmmmmmm              \n");
     printw(";                            mmx ----    ----   m              \n");
     printw(";                             x  +++--  --+++   x              \n");

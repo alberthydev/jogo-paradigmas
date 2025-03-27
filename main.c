@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include "sprites.c"
 
-void main(){
+int main(){
     WINDOW* win = initscr();
     keypad(win, true);
     nodelay(win, true);
@@ -14,12 +14,12 @@ void main(){
     int height = 32;
     int width = 62;
 
-    draw_box();
+    drawMenu();
 
-    draw_text_centered("BOXERS", 10, width);
-    draw_text_centered("1 - INICIAR", 14, width);
-    draw_text_centered("2 - COMO JOGAR", 16, width);
-    draw_text_centered("3 - SAIR", 18, width);
+    menuTextCentered("BOXERS", 10, width);
+    menuTextCentered("1 - INICIAR", 14, width);
+    menuTextCentered("2 - COMO JOGAR", 16, width);
+    menuTextCentered("3 - SAIR", 18, width);
 
     refresh();  // Atualiza a tela
 
@@ -29,6 +29,11 @@ void main(){
             //printw("Left key pressed\n");
             for(;;){
                 clear();  
+                pressed = wgetch(win);
+                if(pressed=='2'){
+                    refresh();
+                    return 0;
+                }
 
                 healthBar(playerH, opponentH);
                 refresh();
