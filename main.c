@@ -14,13 +14,8 @@ int main(){
     int height = 32;
     int width = 62;
 
-    drawMenu();
-
-    menuTextCentered("BOXERS", 10, width);
-    menuTextCentered("1 - INICIAR", 14, width);
-    menuTextCentered("2 - COMO JOGAR", 16, width);
-    menuTextCentered("3 - SAIR", 18, width);
-
+    draw_menu();
+    
     refresh();  // Atualiza a tela
 
     while (true) {

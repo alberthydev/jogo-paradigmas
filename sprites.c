@@ -1,4 +1,3 @@
-#include <string.h>
 #include <unistd.h>
 #include <ncurses.h>
 
@@ -7,31 +6,39 @@ void print_fight_1();
 
 // CANVAS 32x62
 
-void drawMenu() {
-    int height = 32;
-    int width = 62;
-    int start_x = 0;
-    int start_y = 0;
+void draw_menu() {
+    printw("+-------------------------------------------------------------+\n"); 
+    printw("|                                                             |\n");
+    printw("|                                                             |\n");
+    printw("|     ______   _______           _______  _______  _______    |\n");
+    printw("|    (  ___ \\ (  ___  )|\\     /|(  ____ \\(  ____ )(  ____ \\   |\n");
+    printw("|    | (   ) )| (   ) |( \\   / )| (    \\/| (    )|| (    \\/   |\n");
+    printw("|    | (__/ / | |   | | \\ (_) / | (__    | (____)|| (_____    |\n");
+    printw("|    |  __ (  | |   | |  ) _ (  |  __)   |     __)(_____  )   |\n");
+    printw("|    | (  \\ \\ | |   | | / ( ) \\ | (      | (\\ (         ) |   |\n");
+    printw("|    | )___) )| (___) |( /   \\ )| (____/\\| ) \\ \\__/\\____) |   |\n");
+    printw("|    |/ \\___/ (_______)|/     \\|(_______/|/   \\__/\\_______)   |\n");
+    printw("|                                                             |\n");
+    printw("|                                                             |\n");
+    printw("|                                                             |\n");
+    printw("|                       +--------------+                      |\n");
+    printw("|                       |1 - INICIAR   |                      |\n");
+    printw("|                       |              |                      |\n");
+    printw("|                       |2 - COMO JOGAR|                      |\n");
+    printw("|                       |              |                      |\n");
+    printw("|                       |3 - SAIR      |                      |\n");
+    printw("|                       +--------------+                      |\n");
+    printw("|                                                             |\n");
+    printw("|                                                             |\n");
+    printw("|                                                             |\n");
+    printw("|                                                             |\n");
+    printw("|                                                             |\n");
+    printw("|                                                             |\n");
+    printw("|                                                             |\n");
+    printw("|                                                             |\n");
+    printw("+-------------------------------------------------------------+\n");
 
-    // Desenha a borda da caixa usando strings
-    for (int i = 0; i < width; i++) {
-        mvaddch(start_y, start_x + i, '-');  // Linha superior
-        mvaddch(start_y + height - 1, start_x + i, '-');  // Linha inferior
-    }
-    for (int i = 0; i < height; i++) {
-        mvaddch(start_y + i, start_x, '|');  // Linha esquerda
-        mvaddch(start_y + i, start_x + width - 1, '|');  // Linha direita
-    }
-    mvaddch(start_y, start_x, '+');  // Canto superior esquerdo
-    mvaddch(start_y, start_x + width - 1, '+');  // Canto superior direito
-    mvaddch(start_y + height - 1, start_x, '+');  // Canto inferior esquerdo
-    mvaddch(start_y + height - 1, start_x + width - 1, '+');  // Canto inferior direito
-}
-
-void menuTextCentered(const char* text, int y, int width) {
-    int text_len = strlen(text);
-    int start_x = (width - text_len) / 2;
-    mvprintw(y, start_x, "%s", text);
+    refresh();
 }
 
 void healthBar(int playerLife, int opponentLife){
@@ -84,7 +91,7 @@ void fight_sprite_1(){
     printw(";  xx          xxxx         xxx           xx                   \n");
     printw(";  xx         xx  x        xx  x          xx                   \n");
     printw(";  xx            xx        x   xx        xx                    \n");
-    printw(";  xx          x          xx   x       xxx                     \n");
+    printw(";  xx          xx         xx   x       xxx                     \n");
     printw(";   xxx      xxx           xx      xxxxx                       \n");
     printw(";    x       x             x        x                          \n");
 }
@@ -117,7 +124,7 @@ void fight_sprite_2(){
     printw(";   xx          xxxx         xxx           xx                   \n");
     printw(";   xx         xx  x        xx  x          xx                   \n");
     printw(";   xx            xx        x   xx        xx                    \n");
-    printw(";   xx          x          xx   x       xxx                     \n");
+    printw(";   xx          xx         xx   x       xxx                     \n");
     printw(";    xxx      xxx           xx      xxxxx                       \n");
     printw(";     x       x             x        x                          \n");
 }
