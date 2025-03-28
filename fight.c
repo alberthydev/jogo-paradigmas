@@ -5,6 +5,7 @@
 #include "sprites.c"
 
 void fight(WINDOW*);
+void player_punch();
 void opponent_punch();
 
 int option;
@@ -16,7 +17,6 @@ void clear_screen(){
     clrtobot();
 }
 
-// Function to simulate a fight between two boxers
 void fight(WINDOW* win) {
     srand(time(NULL));
     int opponentAttackTime = rand() % 10;
@@ -36,6 +36,15 @@ void fight(WINDOW* win) {
         keypad(win, true);
         nodelay(win, true);
         
+        int kplayer_punch = wgetch(win);
+        if(kplayer_punch == '2'){
+            flushinp();
+            clear_screen();
+            player_punch();
+        }
+        kplayer_punch = -1;
+        
+        flushinp();
         clear_screen();
         if(sprite == 1){
             fight_sprite_1();
@@ -64,25 +73,21 @@ void player_punch(){
     refresh();
     usleep(450000);
 
-    //clear();
-    //health_bar(playerH, opponentH);
     clear_screen();
     player_punch_2();
     refresh();
     usleep(450000);
 
-
-    //clear();
     clear_screen();
     if(opponentDefense == 0){
-        //health_bar(playerH, opponentH);
         player_punch_4();
         refresh();
+        usleep(800000);
 
     }else{
-        //health_bar(playerH, opponentH);
         player_punch_3();
         refresh();
+        usleep(800000);
 
         opponentH--;
     }
@@ -92,7 +97,6 @@ void opponent_punch(){
     WINDOW* teste = initscr();
     keypad(teste, true);
     int pressed = -1; 
-    flushinp();
     
     clear();
     health_bar(playerH, opponentH);
@@ -101,7 +105,6 @@ void opponent_punch(){
     opponent_punch_1();
     refresh();
     pressed=-1;
-    flushinp();
     usleep(450000);
     
     clear_screen();
@@ -117,8 +120,6 @@ void opponent_punch(){
         opponent_punch_4();
         refresh();
         usleep(800000);
-        pressed=-1;
-
     }else{
         opponent_punch_3();
         refresh();
