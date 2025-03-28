@@ -1,84 +1,129 @@
-#include <stdio.h>
+#include <curses.h>
 #include <stdlib.h>
-#include "boxeador.h"
+#include <time.h>
+#include <unistd.h>
+#include "sprites.c"
+
+void fight(WINDOW*);
+void opponent_punch();
 
 int option;
+int playerH = 5;
+int opponentH = 5;
+
+void clear_screen(){
+    move(2,0);
+    clrtobot();
+}
 
 // Function to simulate a fight between two boxers
-void fight(boxeador *box1, boxeador *box2) {
-    box1->life = 3;
-    box2->life = 3;
-
-    while (box1->life > 0 && box2->life > 0) {
-        // Display the life of both boxers
-        printf("LIFE: ");
-        for (int i = 0; i < box1->life; i++) {
-            printf("S ");
+void fight(WINDOW* win) {
+    srand(time(NULL));
+    int opponentAttackTime = rand() % 10;
+    int sprite = 1;
+    
+    for(;;){
+        clear();
+        health_bar(playerH, opponentH);
+        if(opponentAttackTime == 0){
+            clear_screen();
+            opponent_punch();
+            opponentAttackTime = rand() % 7;
         }
-        printf("\n");
-
-        printf("OPPONENT: ");
-        for (int i = 0; i < box2->life; i++) {
-            printf("S ");
-        }
-        printf("\n");
-
-        // Menu of options for the player (boxer 1)
-        printf("1. ATTACK\n");
-        printf("2. DEFEND\n");
-        printf("3. DODGE\n");
-        scanf("%d", &option);
-
-        int box1_action = option;  // Player's action (boxer 1)
-
-        // Boxer 2 (computer) chooses an action randomly
-        int box2_action = rand() % 3;
-
-        // Boxer 1's action
-        if (box1_action == 1) {
-            box2->life--;
-            printf("%s attacked! %s lost 1 life.\n", box1->name, box2->name);
-        } else if (box1_action == 2) {
-            printf("%s defended himself!\n", box1->name);
-        } else if (box1_action == 3) {
-            printf("%s dodged!\n", box1->name);
-        } else {
-            printf("Invalid option. Try again.\n");
-            continue;  // Skip this turn and ask for a new action
-        }
-
-        // Boxer 2's action (computer)
-        if (box2->life > 0) {
-            if (box2_action == 0) {
-                box1->life--;
-                printf("%s attacked! %s lost 1 life.\n", box2->name, box1->name);
-            } else if (box2_action == 1) {
-                printf("%s defended himself!\n", box2->name);
-            } else {
-                printf("%s dodged!\n", box2->name);
-            }
-        }
-
-        // Check for simultaneous attacks (when both attack at the same time)
-        if (box1_action == 1 && box2_action == 0) {
-            // Both attacked. Since they are attacking opposite sides, both lose 1 life
-            box1->life--;
-            box2->life--;
-            printf("Both players attacked! %s and %s lost 1 life.\n", box1->name, box2->name);
-        }
-
+        else 
+            opponentAttackTime--;
         
-        printf("\nPress ENTER for next turn...\n");
-        getchar();  // Clear the keyboard buffer
-        getchar();  // Wait for the user to press ENTER
-
-        // Check winner
-        if (box1->life <= 0) {
-            printf("\n%s wins!\n", box2->name);
-            break;
-        } else if (box2->life <= 0) {
-            printf("\n%s wins!\n", box1->name);
-            break;
+        keypad(win, true);
+        nodelay(win, true);
+        
+        clear_screen();
+        if(sprite == 1){
+            fight_sprite_1();
+            refresh();
+            usleep(300000);
+            sprite = 0;
         }
+        else{
+            fight_sprite_2();
+            refresh();  
+            usleep(300000);
+            sprite = 1;
+        }
+        usleep(200000);
+    } 
+}
+
+void player_punch(){
+    int opponentDefense = rand() % 2;
+    
+    clear();
+    health_bar(playerH, opponentH);
+    refresh();
+
+    player_punch_1();
+    refresh();
+    usleep(450000);
+
+    //clear();
+    //health_bar(playerH, opponentH);
+    clear_screen();
+    player_punch_2();
+    refresh();
+    usleep(450000);
+
+
+    //clear();
+    clear_screen();
+    if(opponentDefense == 0){
+        //health_bar(playerH, opponentH);
+        player_punch_4();
+        refresh();
+
+    }else{
+        //health_bar(playerH, opponentH);
+        player_punch_3();
+        refresh();
+
+        opponentH--;
     }
+}
+
+void opponent_punch(){ 
+    WINDOW* teste = initscr();
+    keypad(teste, true);
+    int pressed = -1; 
+    flushinp();
+    
+    clear();
+    health_bar(playerH, opponentH);
+    refresh();
+        
+    opponent_punch_1();
+    refresh();
+    pressed=-1;
+    flushinp();
+    usleep(450000);
+    
+    clear_screen();
+    opponent_punch_2();
+    refresh();
+    flushinp();
+    usleep(400000);
+    pressed = wgetch(teste);
+
+    clear_screen();
+    if(pressed == '1'){
+        flushinp();
+        opponent_punch_4();
+        refresh();
+        usleep(800000);
+        pressed=-1;
+
+    }else{
+        opponent_punch_3();
+        refresh();
+        usleep(800000);
+        playerH--;
+    }
+    pressed=-1;
 }

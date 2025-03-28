@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include <ncurses.h>
 
-void healthBar(int, int);
+void health_bar(int, int);
 void print_fight_1();
 
 // CANVAS 32x62
@@ -41,7 +41,7 @@ void draw_menu() {
     refresh();
 }
 
-void healthBar(int playerLife, int opponentLife){
+void health_bar(int playerLife, int opponentLife){
     // Desenha a barra de vida do jogador
     printw("; PLAYER: ");
     for (int i = 0; i < playerLife; i++) {
@@ -297,8 +297,8 @@ void opponent_punch_1(){
  
 void opponent_punch_2(){
     printw(";                                                              \n");
-    printw(";                                                              \n");
-    printw(";                                     mmmmmmmmmmm              \n");
+    printw("; !!!!!CAUTION!!!!!                                            \n");
+    printw(";     !!!!CAUTION!!!!!                mmmmmmmmmmm              \n");
     printw(";                                    mmmmmmmmmmmmmm            \n");
     printw(";                                  mmmmmmmmmmmmmmmmmmm         \n");
     printw(";                                  mmmmmmmmmmmmmmmmmm          \n");
