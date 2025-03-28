@@ -16,22 +16,21 @@ int main(){
 
     draw_menu();
     
-    refresh();  // Atualiza a tela
+    refresh();  
 
     while (true) {
         int pressed = wgetch(win);
         if(pressed == '1'){
-            //printw("Left key pressed\n");
             for(;;){
                 clear();  
                 pressed = wgetch(win);
                 if(pressed=='2'){
                     refresh();
-                    return 0;
+                    clear();
+                    healthBar(playerH, opponentH);
                 }
 
                 healthBar(playerH, opponentH);
-                refresh();
                 if(sprite == 1){
                     fight_sprite_1();
                     refresh();
@@ -45,7 +44,6 @@ int main(){
                 usleep(450000);  
             }
         }else if(pressed == '3'){
-            //printw("Right key pressed\n");
             break;
         }
         usleep(100000);
