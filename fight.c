@@ -19,11 +19,31 @@ void clear_screen(){
 
 void fight(WINDOW* win) {
     srand(time(NULL));
+    playerH = 5;
+    opponentH = 5;
     int opponentAttackTime = rand() % 10;
     int sprite = 1;
-    
+        
     for(;;){
         clear();
+
+        if(playerH == 0){
+            clear();
+            defeat(); 
+            refresh();
+            usleep(900000);
+            clear();
+            break;
+        }
+        else if(opponentH == 0){
+            clear();
+            victory(); 
+            refresh();
+            usleep(900000);
+            clear();
+            break;
+        }
+
         health_bar(playerH, opponentH);
         if(opponentAttackTime == 0){
             clear_screen();
@@ -58,7 +78,7 @@ void fight(WINDOW* win) {
             usleep(300000);
             sprite = 1;
         }
-        usleep(200000);
+        usleep(100000);
     } 
 }
 
@@ -71,12 +91,12 @@ void player_punch(){
 
     player_punch_1();
     refresh();
-    usleep(450000);
+    usleep(300000);
 
     clear_screen();
     player_punch_2();
     refresh();
-    usleep(450000);
+    usleep(300000);
 
     clear_screen();
     if(opponentDefense == 0){
@@ -88,8 +108,8 @@ void player_punch(){
         player_punch_3();
         refresh();
         usleep(800000);
-
         opponentH--;
+        health_bar(playerH, opponentH);
     }
 }
 
@@ -105,13 +125,13 @@ void opponent_punch(){
     opponent_punch_1();
     refresh();
     pressed=-1;
-    usleep(450000);
+    usleep(300000);
     
     clear_screen();
     opponent_punch_2();
     refresh();
     flushinp();
-    usleep(400000);
+    usleep(300000);
     pressed = wgetch(teste);
 
     clear_screen();
@@ -125,6 +145,7 @@ void opponent_punch(){
         refresh();
         usleep(800000);
         playerH--;
+        health_bar(playerH, opponentH);
     }
     pressed=-1;
 }
