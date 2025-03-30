@@ -71,7 +71,7 @@ void draw_interactive_menu(WINDOW *menu_win, int highlight) {
 
     for (int i = 0; i < 3; ++i) {
         if (highlight == i + 1) {
-            wattron(menu_win, A_REVERSE); 
+            wattron(menu_win, A_REVERSE);
             mvwprintw(menu_win, start_y + i * 2, start_x, "%s", options[i]);
             wattroff(menu_win, A_REVERSE);
         } else {
