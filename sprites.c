@@ -40,22 +40,11 @@ void draw_menu() {
     printw("|                                                             |\n");
     printw("+-------------------------------------------------------------+\n");
     
-    draw_centered_box(32, 62);
-
     refresh();
 }
 
-void draw_centered_box(int height, int width) {
-    int start_y = (LINES - height) / 2; // Calcula a posição vertical central
-    int start_x = (COLS - width) / 2;   // Calcula a posição horizontal central
-
-    WINDOW *win = newwin(height, width, start_y, start_x); // Cria uma nova janela
-    box(win, 0, 0);                                       // Desenha a borda
-    wrefresh(win);                                        // Atualiza a janela
-}
-
 void how_to_play() {
-    clear(); // Limpa a tela antes de desenhar
+    clear(); 
     printw("+-------------------------------------------------------------+\n");
     printw("|                                                             |\n");
     printw("|                                                             |\n");
