@@ -1,6 +1,8 @@
+#include <curses.h>
 #include <unistd.h>
 #include <ncurses.h>
 
+void draw_centered_box(int, int);
 void health_bar(int, int);
 void print_fight_1();
 
@@ -21,13 +23,13 @@ void draw_menu() {
     printw("|                                                             |\n");
     printw("|                                                             |\n");
     printw("|                                                             |\n");
-    printw("|                       +--------------+                      |\n");
-    printw("|                       |1 - INICIAR   |                      |\n");
-    printw("|                       |              |                      |\n");
-    printw("|                       |2 - COMO JOGAR|                      |\n");
-    printw("|                       |              |                      |\n");
-    printw("|                       |3 - SAIR      |                      |\n");
-    printw("|                       +--------------+                      |\n");
+    printw("|                                                             |\n");
+    printw("|                                                             |\n");
+    printw("|                                                             |\n");
+    printw("|                                                             |\n");
+    printw("|                                                             |\n");
+    printw("|                                                             |\n");
+    printw("|                                                             |\n");
     printw("|                                                             |\n");
     printw("|                                                             |\n");
     printw("|                                                             |\n");
@@ -37,7 +39,53 @@ void draw_menu() {
     printw("|                                                             |\n");
     printw("|                                                             |\n");
     printw("+-------------------------------------------------------------+\n");
+    
+    draw_centered_box(32, 62);
 
+    refresh();
+}
+
+void draw_centered_box(int height, int width) {
+    int start_y = (LINES - height) / 2; // Calcula a posição vertical central
+    int start_x = (COLS - width) / 2;   // Calcula a posição horizontal central
+
+    WINDOW *win = newwin(height, width, start_y, start_x); // Cria uma nova janela
+    box(win, 0, 0);                                       // Desenha a borda
+    wrefresh(win);                                        // Atualiza a janela
+}
+
+void how_to_play() {
+    clear(); // Limpa a tela antes de desenhar
+    printw("+-------------------------------------------------------------+\n");
+    printw("|                                                             |\n");
+    printw("|                                                             |\n");
+    printw("|  +-------------------------------------------------------+  |\n");
+    printw("|  |                                                       |  |\n");
+    printw("|  |    O JOGO E BEM SIMPLES, VOCE DEFENDE E ATACA, O SEU  |  |\n");
+    printw("|  |   OPONENTE FARA O MESMO, QUANDO VOCE FOR SOFRER UMA   |  |\n");
+    printw("|  |    TENTATIVA DE ATAQUE, APERTE O BOTAO DE DEFESA A    |  |\n");
+    printw("|  |   TEMPO E NAO PERDERA VIDA, QUANDO VOCE ATACAR, SEU   |  |\n");
+    printw("|  |      OPONENTE PODE DEFENDER TAMBEM ENTAO SEJA RAPIDO  |  |\n");
+    printw("|  |          E ESTRATEGICO PARA CHEGAR A VITORIA          |  |\n");
+    printw("|  |                                                       |  |\n");
+    printw("|  |                                                       |  |\n");
+    printw("|  |                                                       |  |\n");
+    printw("|  |            1 - DEFENDE                                |  |\n");
+    printw("|  |                                                       |  |\n");
+    printw("|  |            2 - ATACA                                  |  |\n");
+    printw("|  |                                                       |  |\n");
+    printw("|  |            Q - SAIRA DE UMA LUTA JA INICIADA          |  |\n");
+    printw("|  |                                                       |  |\n");
+    printw("|  |                                                       |  |\n");
+    printw("|  |                                                       |  |\n");
+    printw("|  |                                                       |  |\n");
+    printw("|  |     PARA VOLTAR AO MENU PRESSIONE QUALQUER TECLA      |  |\n");
+    printw("|  |                                                       |  |\n");
+    printw("|  |                                                       |  |\n");
+    printw("|  +-------------------------------------------------------+  |\n");
+    printw("|                                                             |\n");
+    printw("|                                                             |\n");
+    printw("+-------------------------------------------------------------+\n");
     refresh();
 }
 

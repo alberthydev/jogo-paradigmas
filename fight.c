@@ -31,7 +31,7 @@ void fight(WINDOW* win) {
             clear();
             defeat(); 
             refresh();
-            usleep(900000);
+            usleep(1000000);
             clear();
             break;
         }
@@ -39,13 +39,13 @@ void fight(WINDOW* win) {
             clear();
             victory(); 
             refresh();
-            usleep(900000);
+            usleep(1000000);
             clear();
             break;
         }
-
+        
         health_bar(playerH, opponentH);
-        if(opponentAttackTime == 0){
+        if(opponentAttackTime == 0){ 
             clear_screen();
             opponent_punch();
             opponentAttackTime = rand() % 7;
@@ -55,12 +55,15 @@ void fight(WINDOW* win) {
         
         keypad(win, true);
         nodelay(win, true);
-        
+         
         int kplayer_punch = wgetch(win);
         if(kplayer_punch == '2'){
             flushinp();
             clear_screen();
             player_punch();
+        }
+        if(kplayer_punch == 'q'|| kplayer_punch == 'Q'){
+            break;
         }
         kplayer_punch = -1;
         
@@ -114,8 +117,8 @@ void player_punch(){
 }
 
 void opponent_punch(){ 
-    WINDOW* teste = initscr();
-    keypad(teste, true);
+    WINDOW* player_defense = initscr();
+    keypad(player_defense, true);
     int pressed = -1; 
     
     clear();
@@ -132,8 +135,8 @@ void opponent_punch(){
     refresh();
     flushinp();
     usleep(300000);
-    pressed = wgetch(teste);
-
+    pressed = wgetch(player_defense);
+    
     clear_screen();
     if(pressed == '1'){
         flushinp();
