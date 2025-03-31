@@ -1,12 +1,44 @@
 #include <curses.h>
-#include <unistd.h>
-#include <ncurses.h>
 
-void draw_centered_box(int, int);
+void draw_interactive_menu(WINDOW*, int);
+void draw_menu();
+void how_to_play();
 void health_bar(int, int);
-void print_fight_1();
+void fight_sprite_1();
+void fight_sprite_2();
+void player_punch_1();
+void player_punch_2();
+void player_punch_3();
+void player_punch_4();
+void opponent_punch_1();
+void opponent_punch_2();
+void opponent_punch_3();
+void opponent_punch_4();
+void victory();
+void defeat();
 
-// CANVAS 32x62
+void draw_interactive_menu(WINDOW *menu_win, int highlight) {
+    const char *options[] = {
+        "1 - INICIAR",
+        "2 - COMO JOGAR",
+        "3 - SAIR"
+    };
+
+    draw_menu(); 
+    int start_y = 17; 
+    int start_x = 24; 
+
+    for (int i = 0; i < 3; ++i) {
+        if (highlight == i + 1) {
+            wattron(menu_win, A_REVERSE);
+            mvwprintw(menu_win, start_y + i * 2, start_x, "%s", options[i]);
+            wattroff(menu_win, A_REVERSE);
+        } else {
+            mvwprintw(menu_win, start_y + i * 2, start_x, "%s", options[i]);
+        }
+    }
+    wrefresh(menu_win);
+}
 
 void draw_menu() {
     printw("+-------------------------------------------------------------+\n"); 
@@ -39,22 +71,22 @@ void draw_menu() {
     printw("|                                                             |\n");
     printw("|                                                             |\n");
     printw("+-------------------------------------------------------------+\n");
-    
+
     refresh();
 }
 
 void how_to_play() {
-    clear(); 
+    clear(); // Limpa a tela antes de desenhar
     printw("+-------------------------------------------------------------+\n");
     printw("|                                                             |\n");
     printw("|                                                             |\n");
     printw("|  +-------------------------------------------------------+  |\n");
     printw("|  |                                                       |  |\n");
-    printw("|  |    O JOGO E BEM SIMPLES, VOCE DEFENDE E ATACA, O SEU  |  |\n");
+    printw("|  |   O JOGO E BEM SIMPLES, VOCE DEFENDE E ATACA, O SEU   |  |\n");
     printw("|  |   OPONENTE FARA O MESMO, QUANDO VOCE FOR SOFRER UMA   |  |\n");
     printw("|  |    TENTATIVA DE ATAQUE, APERTE O BOTAO DE DEFESA A    |  |\n");
     printw("|  |   TEMPO E NAO PERDERA VIDA, QUANDO VOCE ATACAR, SEU   |  |\n");
-    printw("|  |      OPONENTE PODE DEFENDER TAMBEM ENTAO SEJA RAPIDO  |  |\n");
+    printw("|  |    OPONENTE PODE DEFENDER TAMBEM ENTAO SEJA RAPIDO    |  |\n");
     printw("|  |          E ESTRATEGICO PARA CHEGAR A VITORIA          |  |\n");
     printw("|  |                                                       |  |\n");
     printw("|  |                                                       |  |\n");
