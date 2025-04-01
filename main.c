@@ -41,13 +41,17 @@ int main(){
 
         if (choice == 1) {
             clear();
+            nodelay(win, false); // Certifique-se de que o modo bloqueante está ativado antes de entrar na luta
             fight(win);
-            choice = 0; // Reset choice
+            nodelay(win, false); // Restaura o modo bloqueante após a luta
+            flushinp();          // Limpa o buffer de entrada
+            choice = 0;          // Reset choice
         } else if (choice == 2) {
             clear();
+            flushinp();          // Limpa o buffer de entrada antes de exibir "Como Jogar"
             how_to_play();
-            wgetch(win); // Espera por uma tecla para voltar ao menu
-            choice = 0; // Reset choice
+            wgetch(win);         // Espera por uma tecla para voltar ao menu
+            choice = 0;          // Reset choice
         } else if (choice == 3) {
             break;
         }
