@@ -127,7 +127,7 @@ void player_punch(){
 }
 
 void opponent_punch(WINDOW* win){ 
-    int pressed = -1; // Defesa do ataque do oponente
+    int pressed = -1; // Defesa do jogador
 
     clear();
     health_bar(playerH, opponentH);
