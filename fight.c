@@ -56,7 +56,7 @@ void fight(WINDOW* win) {
         // Ataque do oponente
         if(opponentAttackTime == 0){ 
             clear_screen(); // Limpa a tela abaixo da barra de vida
-            opponent_punch(); // Chama o sprite de soco do oponente
+            opponent_punch(win); // Chama o sprite de soco do oponente
             opponentAttackTime = rand() % 7; // Redefine o tempo de ataque do oponente
         }
         else 
@@ -65,7 +65,7 @@ void fight(WINDOW* win) {
         nodelay(win, true); // Garante a continuidade de execução
          
         int kplayer_punch = wgetch(win); // Ataque do jogador
-        if(kplayer_punch == '2'){
+        if(kplayer_punch == '2' && playerH > 0){ // Verifica se o jogador ainda tem vida
             flushinp(); // Limpa o cache
             clear_screen();
             player_punch(); // Soco do jogador
@@ -126,7 +126,7 @@ void player_punch(){
     }
 }
 
-void opponent_punch(){ 
+void opponent_punch(WINDOW* win){ 
     int pressed = -1; // Defesa do ataque do oponente
 
     clear();
@@ -141,9 +141,14 @@ void opponent_punch(){
     opponent_punch_2(); // Chama o segundo sprite do ataque do oponente
     refresh();
     flushinp(); // Limpa o buffer de entrada do usuário
-    pressed = wgetch(); // Guarda o input do jogador
-    usleep(300000);
-    
+
+    // Aguarda um curto período para capturar a entrada do jogador
+    for (int i = 0; i < 10; i++) { 
+        pressed = wgetch(win);
+        if (pressed == '1') break; // Se o jogador pressionar "1", interrompe o loop
+        usleep(30000); // Aguarda 30ms antes de tentar novamente
+    }
+
     clear_screen();
     if(pressed == '1'){ // Se o jogador pressionar "1" a tempo, ele defende
         flushinp();
@@ -157,5 +162,5 @@ void opponent_punch(){
         health_bar(playerH, opponentH);
         usleep(800000);
     }
-    pressed=-1;
+    pressed = -1;
 }
