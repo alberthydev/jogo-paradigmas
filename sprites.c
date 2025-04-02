@@ -1,5 +1,6 @@
 #include <curses.h>
 
+// Declaração de todas as funções do arquivo
 void draw_interactive_menu(WINDOW*, int);
 void draw_menu();
 void how_to_play();
@@ -17,31 +18,33 @@ void opponent_punch_4();
 void victory();
 void defeat();
 
+// Mostrar o menu interativo no meio da tela
 void draw_interactive_menu(WINDOW *menu_win, int highlight) {
-    const char *options[] = {
+    const char *options[] = { // Array constante de opções
         "1 - INICIAR",
         "2 - COMO JOGAR",
         "3 - SAIR"
     };
 
-    draw_menu(); 
-    int start_y = 17; 
-    int start_x = 24; 
+    draw_menu(); // Chama a função para desenhar o titulo com as bordas ao redor
+    int start_y = 17; // Posição Y do menu interativo
+    int start_x = 24; // Posição X do menu interativo
 
-    for (int i = 0; i < 3; ++i) {
-        if (highlight == i + 1) {
-            wattron(menu_win, A_REVERSE);
-            mvwprintw(menu_win, start_y + i * 2, start_x, "%s", options[i]);
-            wattroff(menu_win, A_REVERSE);
+    for (int i = 0; i < 3; ++i) { // For para exibir o menu interativo
+        if (highlight == i + 1) { // Define a opção que será mostrada como selecionada
+            wattron(menu_win, A_REVERSE); // Reverte as cores para branco
+            mvwprintw(menu_win, start_y + i * 2, start_x, "%s", options[i]); // Escolhe o item do array
+            wattroff(menu_win, A_REVERSE); // Reverte novamente as cores para preto
         } else {
-            mvwprintw(menu_win, start_y + i * 2, start_x, "%s", options[i]);
+            mvwprintw(menu_win, start_y + i * 2, start_x, "%s", options[i]); // Desenha as outras opções
         }
     }
-    wrefresh(menu_win);
+    wrefresh(menu_win); // Atualiza a tela passada como parametro na função
 }
 
+// Sprite do titulo
 void draw_menu() {
-    printw("+-------------------------------------------------------------+\n"); 
+    printw("+-------------------------------------------------------------+\n");
     printw("|                                                             |\n");
     printw("|                                                             |\n");
     printw("|     ______   _______           _______  _______  _______    |\n");
@@ -75,6 +78,7 @@ void draw_menu() {
     refresh();
 }
 
+// Sprite do tutorial
 void how_to_play() {
     clear(); // Limpa a tela antes de desenhar
     printw("+-------------------------------------------------------------+\n");
@@ -110,6 +114,7 @@ void how_to_play() {
     refresh();
 }
 
+// Sprite da barra de vida
 void health_bar(int playerLife, int opponentLife){
     // Desenha a barra de vida do jogador
     printw("; PLAYER: ");
@@ -132,6 +137,7 @@ void health_bar(int playerLife, int opponentLife){
     printw("\n");
 }
 
+// Sprite da luta 1
 void fight_sprite_1(){
     printw(";                                                              \n");
     printw(";                                         mmmmmmmmmmm          \n");
@@ -165,6 +171,7 @@ void fight_sprite_1(){
     printw(";    x       x             x        x                          \n");
 }
 
+// Sprite da luta 2
 void fight_sprite_2(){
     printw(";                                                              \n");
     printw(";                                 mmmmmmmmmmm                  \n");
@@ -198,6 +205,7 @@ void fight_sprite_2(){
     printw(";     x       x             x        x                         \n");
 }
 
+// Sprite 1 do soco do jogador
 void player_punch_1(){
     printw(";                                                              \n");
     printw(";                                                              \n");
@@ -231,6 +239,7 @@ void player_punch_1(){
     printw(";    x       x             x        x                          \n");    
 }
 
+// Sprite 2 do soco do jogador
 void player_punch_2(){
     printw(";                                                              \n");
     printw(";                                                              \n");
@@ -264,6 +273,7 @@ void player_punch_2(){
     printw(";    x       x                   xx      xx                    \n");
 }
 
+// Sprite 3 do soco do jogador
 void player_punch_3(){
     printw(";                                                              \n");
     printw(";                             .....                            \n");
@@ -297,6 +307,7 @@ void player_punch_3(){
     printw(";    x       x                    xx            x              \n");
 }
 
+// Sprite 4 do soco do jogador
 void player_punch_4(){
     printw(";                                                              \n");
     printw(";                                   .                  ....    \n");
@@ -330,7 +341,7 @@ void player_punch_4(){
     printw(";    x       x                    xx            x              \n");
 }
 
-
+// Sprite 1 do soco do oponente
 void opponent_punch_1(){
     printw(";                                                              \n");
     printw(";                                                              \n");
@@ -363,7 +374,8 @@ void opponent_punch_1(){
     printw(";   xxx      xxx           xx      xxxxx                       \n");
     printw(";    x       x             x        x                          \n");
 }
- 
+
+// Sprite 2 do soco do oponente
 void opponent_punch_2(){
     printw(";                                                              \n");
     printw("; !!!!!CAUTION!!!!!                                            \n");
@@ -396,7 +408,8 @@ void opponent_punch_2(){
     printw(";   xxx      xxx           xx      xxxxx                       \n");
     printw(";    x       x             x        x                          \n");
 }  
- 
+
+// Sprite 3 do soco do oponente
 void opponent_punch_3(){
     printw(";                                                              \n");
     printw(";                                                              \n");
@@ -428,8 +441,9 @@ void opponent_punch_3(){
     printw(";  xx          xx         xx   x       xxx                     \n");
     printw(";   xxx      xxx           xx      xxxxx                       \n");
     printw(";    x       x             x        x                          \n");
-}       
-     
+}
+
+// Sprite 4 do soco do oponente
 void opponent_punch_4(){
     printw(";                                                              \n");
     printw("; ddd  ddd ddd ddd d  d  dd ddd                                \n");
@@ -463,6 +477,7 @@ void opponent_punch_4(){
     printw(";    x        x           x          xx                        \n");   
 }
 
+// Sprite de Vitoria
 void victory(){
     printw(";                                                              \n");
     printw(";                                                              \n");
@@ -496,6 +511,7 @@ void victory(){
     printw(";              xxx          .      .      xxxxxx               \n");
 }
 
+// Sprite de perda
 void defeat(){
     printw(";                                                              \n");
     printw(";                                                              \n");
