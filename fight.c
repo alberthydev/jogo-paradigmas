@@ -4,34 +4,40 @@
 #include <unistd.h>
 #include "sprites.c"
 
+// Declaração das funções do arquivo
+void clear_screen();
 void fight(WINDOW*);
 void player_punch();
 void opponent_punch();
 
+// Variaveis globais
 int option;
 int playerH = 5;
 int opponentH = 5;
 
+// Limpa a tela, partir de uma coordenada
 void clear_screen(){
-    move(2,0);
-    clrtobot();
+    move(2,0); // Move o cursor para Y=2 e X=0
+    clrtobot(); // Limpa a tela a partir dessa coordenada do cursor
 }
 
+// Função principal da luta
 void fight(WINDOW* win) {
-    srand(time(NULL));
-    playerH = 5;
-    opponentH = 5;
-    int opponentAttackTime = rand() % 10;
-    int sprite = 1;
+    srand(time(NULL)); // Define a seed do random
+    playerH = 5; // Garante os valores de vida do jogador
+    opponentH = 5; // Garante os valores de vida do oponente
+    int opponentAttackTime = rand() % 10; // Define o tempo de ataque do oponente
+    int sprite = 1; // Define o primeiro sprite da luta
         
     for(;;){
-        clear();
+        clear(); // Limpa a tela
 
+        // Chama as telas de vitória ou derrota
         if(playerH == 0){
             clear();
             defeat(); 
-            refresh();
-            usleep(1000000);
+            refresh(); 
+            usleep(1000000); // Aguarda 1 segundo
             clear();
             break;
         }
@@ -43,33 +49,37 @@ void fight(WINDOW* win) {
             clear();
             break;
         }
-        
+
+        // Desenha a barra de vida
         health_bar(playerH, opponentH);
+
+        // Ataque do oponente
         if(opponentAttackTime == 0){ 
-            clear_screen();
-            opponent_punch();
-            opponentAttackTime = rand() % 7;
+            clear_screen(); // Limpa a tela abaixo da barra de vida
+            opponent_punch(); // Chama o sprite de soco do oponente
+            opponentAttackTime = rand() % 7; // Redefine o tempo de ataque do oponente
         }
         else 
-            opponentAttackTime--;
+            opponentAttackTime--; // Decrementa um do tempo de ataque do oponente
         
-        keypad(win, true);
-        nodelay(win, true);
+        nodelay(win, true); // Garante a continuidade de execução
          
-        int kplayer_punch = wgetch(win);
+        int kplayer_punch = wgetch(win); // Ataque do jogador
         if(kplayer_punch == '2'){
-            flushinp();
+            flushinp(); // Limpa o cache
             clear_screen();
-            player_punch();
+            player_punch(); // Soco do jogador
         }
+
+        // Sair da luta a qualquer momento pressionando "Q" ou "q"
         if(kplayer_punch == 'q'|| kplayer_punch == 'Q'){
             break;
         }
-        kplayer_punch = -1;
+        kplayer_punch = -1; // Redefine o valor de ataque do jogador
         
         flushinp();
         clear_screen();
-        if(sprite == 1){
+        if(sprite == 1){ // Define qual dos sprites de animação irá ser exibido
             fight_sprite_1();
             refresh();
             usleep(300000);
@@ -81,28 +91,28 @@ void fight(WINDOW* win) {
             usleep(300000);
             sprite = 1;
         }
-        usleep(100000);
+        usleep(100000); // Aguarda um segundo
     } 
 }
 
 void player_punch(){
-    int opponentDefense = rand() % 2;
+    int opponentDefense = rand() % 2; // Define se o oponente irá defender ou não
     
     clear();
     health_bar(playerH, opponentH);
     refresh();
 
-    player_punch_1();
+    player_punch_1(); // Chama o primeiro sprite do ataque do jogador
     refresh();
     usleep(300000);
 
     clear_screen();
-    player_punch_2();
+    player_punch_2(); // Chama o segundo sprite do ataque do jogador
     refresh();
     usleep(300000);
 
     clear_screen();
-    if(opponentDefense == 0){
+    if(opponentDefense == 0){ // Defesa do oponente
         player_punch_4();
         refresh();
         usleep(800000);
@@ -110,45 +120,42 @@ void player_punch(){
     }else{
         player_punch_3();
         refresh();
-        usleep(800000);
-        opponentH--;
+        opponentH--; // Diminui a vida do oponente
         health_bar(playerH, opponentH);
+        usleep(800000);
     }
 }
 
 void opponent_punch(){ 
-    WINDOW* player_defense = initscr();
-    keypad(player_defense, true);
-    int pressed = -1; 
-    
+    int pressed = -1; // Defesa do ataque do oponente
+
     clear();
     health_bar(playerH, opponentH);
     refresh();
         
-    opponent_punch_1();
+    opponent_punch_1(); // Chama o primeiro sprite do ataque do oponente
     refresh();
-    pressed=-1;
     usleep(300000);
     
     clear_screen();
-    opponent_punch_2();
+    opponent_punch_2(); // Chama o segundo sprite do ataque do oponente
     refresh();
-    flushinp();
+    flushinp(); // Limpa o buffer de entrada do usuário
+    pressed = wgetch(); // Guarda o input do jogador
     usleep(300000);
-    pressed = wgetch(player_defense);
     
     clear_screen();
-    if(pressed == '1'){
+    if(pressed == '1'){ // Se o jogador pressionar "1" a tempo, ele defende
         flushinp();
-        opponent_punch_4();
+        opponent_punch_4(); // Chama a defesa do jogador
         refresh();
         usleep(800000);
     }else{
-        opponent_punch_3();
+        opponent_punch_3(); // Chama o soco no jogador
         refresh();
-        usleep(800000);
-        playerH--;
+        playerH--; // Diminui a vida do jogador
         health_bar(playerH, opponentH);
+        usleep(800000);
     }
     pressed=-1;
 }
