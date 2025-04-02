@@ -2,27 +2,26 @@
 #include <unistd.h>
 #include "fight.c"
 
-void draw_interactive_menu(WINDOW *menu_win, int highlight);
-
 int main(){
-    WINDOW* win = initscr();
-    curs_set(0); 
-    noecho();
-    keypad(win, TRUE);
+    WINDOW* win = initscr(); // Define a janela no terminal para alterações
+    curs_set(0); // Desabilita a exibição do cursor na tela
+    noecho(); 
+    keypad(win, TRUE); // Possibilita a leitura das setas do teclado
 
-    int highlight = 1;
-    int choice = 0;
+    int highlight = 1; // Variavel para definir a opção do menu interativo
+    int choice = 0; // Escolha do menu interativo
 
+    // While infinito para o menu principal
     while (true) {
-        clear();
-        draw_interactive_menu(win, highlight);
-        refresh();
+        clear(); // Limpa a tela
+        draw_interactive_menu(win, highlight); // Chama a função do menu interativo
+        refresh(); // Confirma alterações na tela
 
-        int pressed = wgetch(win);
-        switch (pressed) {
+        int pressed = wgetch(win); // Input do usuario
+        switch (pressed) { // Switch case para definir a escolha do usuario no menu
             case KEY_UP:
                 if (highlight == 1)
-                    highlight = 3; // Número de opções no menu
+                    highlight = 3; 
                 else
                     --highlight;
                 break;
@@ -33,31 +32,30 @@ int main(){
                     ++highlight;
                 break;
             case 10: // Enter
-                choice = highlight;
+                choice = highlight; // Define a escolha no menu
                 break;
             default:
                 break;
         }
 
-        if (choice == 1) {
+        if (choice == 1) { // Chama a luta principal
             clear();
             nodelay(win, false); // Certifique-se de que o modo bloqueante está ativado antes de entrar na luta
-            fight(win);
+            fight(win); // Chama a função luta do jogo
             nodelay(win, false); // Restaura o modo bloqueante após a luta
-            flushinp();          // Limpa o buffer de entrada
-            choice = 0;          // Reset choice
+            flushinp(); // Limpa o buffer de entrada do usuário
+            choice = 0; // Reseta a variável para novas entradas
         } else if (choice == 2) {
             clear();
-            flushinp();          // Limpa o buffer de entrada antes de exibir "Como Jogar"
-            how_to_play();
-            wgetch(win);         // Espera por uma tecla para voltar ao menu
-            choice = 0;          // Reset choice
+            flushinp();          
+            how_to_play(); // Chama a tela de tutorial do jogo
+            wgetch(win); // Espera por uma tecla para voltar ao menu
+            choice = 0;
         } else if (choice == 3) {
-            break;
+            break; // Sai do jogo
         }
-        usleep(100000);
     }
 
-    endwin();
+    endwin(); // Encerra a tela do terminal
     return 0;
 }
