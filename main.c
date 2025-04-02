@@ -5,7 +5,7 @@
 int main(){
     WINDOW* win = initscr(); // Define a janela no terminal para alterações
     curs_set(0); // Desabilita a exibição do cursor na tela
-    noecho(); 
+    noecho(); // Desativa a exibição dos caracteres digitados pelo usuário no terminal
     keypad(win, TRUE); // Possibilita a leitura das setas do teclado
 
     int highlight = 1; // Variavel para definir a opção do menu interativo
@@ -20,16 +20,16 @@ int main(){
         int pressed = wgetch(win); // Input do usuario
         switch (pressed) { // Switch case para definir a escolha do usuario no menu
             case KEY_UP:
-                if (highlight == 1)
-                    highlight = 3; 
+                if (highlight == 1) // Verifica se está na primeira opção
+                    highlight = 3; // Se estiver, ele vai para a terceira
                 else
-                    --highlight;
+                    --highlight; // Decrementa um para ir para cima
                 break;
             case KEY_DOWN:
-                if (highlight == 3)
-                    highlight = 1;
+                if (highlight == 3) // Verifica se esta na ultima opção
+                    highlight = 1; // Se estiver, ele vai para a primeira
                 else
-                    ++highlight;
+                    ++highlight; // Incrementa um para ir para baixo
                 break;
             case 10: // Enter
                 choice = highlight; // Define a escolha no menu
