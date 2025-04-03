@@ -108,5 +108,9 @@ Se encontrou algum bug, abra uma issue [aqui](https://github.com/alberthydev/jog
 
 ---
 
-## 🖼️ GALERIA  
-
+## 🖼️ SCREENSHOTS
+<div style="display: flex; justify-content: center;">
+    <img src="screenshots/screen1.png" alt="Screenshot 1" style="width: 200px; margin: 10px;">
+    <img src="screenshots/screen2.png" alt="Screenshot 2" style="width: 200px; margin: 10px;">
+    <img src="screenshots/screen3.png" alt="Screenshot 3" style="width: 200px; margin: 10px;">
+</div>
