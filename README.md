@@ -69,8 +69,8 @@ gcc main.c -o boxers -lncurses
 ---
 
 ## 🛠️ FERRAMENTAS UTILIZADAS  
-Biblioteca NCurses
-GCC
+- NCurses
+- GCC
 
 ---
 
