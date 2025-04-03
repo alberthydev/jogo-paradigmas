@@ -4,12 +4,13 @@ Um jogo de luta 2D desenvolvido em C, simples e direto, com interface em ASCII n
 ---
 
 ## 📌 SOBRE O PROJETO  
-O projeto visa criar um jogo simplificado, utilizando uma linguagem estruturada para emular uma luta de boxe, a linaguagem
-C, também utilizamos uma biblioteca bem conhecida para lidar com as atualizações do terminal, **ncurses**, desenvolvida nos anos
-80 e posteriormente aprimorada nos anos 90, é amplamente utilizada para deixar o terminal mais intuitivo, permite inputs
-diretos do cliente, cores, atualizações na tela, desenho, etc... Para nosso projeto, ela lida com os sprites dinamicamente,
-para dar um senso de animação, e para ler as teclas pressionadas enquanto o jogo roda, a partir do momento que a luta começa,
-se o jogador não pressionar as teclas de defesa ou ataque, o programa continuará rodando até a vida do jogador chegar a zero.
+O projeto visa criar um jogo simplificado, utilizando a linguagem C para simular uma luta de boxe, para melhor experiência do
+usuário utilizamos uma biblioteca famosa para lidar com as atualizações do terminal, **ncurses**, desenvolvida nos anos 80 e
+posteriormente aprimorada nos anos 90, é amplamente utilizada para deixar o terminal mais intuitivo, permite inputs diretos
+do usuario, cores, atualizações na tela, desenho, etc... Para nosso projeto, ela lida com os sprites sendo alterados
+dinamicamente dando um senso de movimento, e também lê as teclas pressionadas do teclado enquanto o jogo roda,
+a partir do momento que a luta começa, se o jogador não pressionar as teclas de defesa ou ataque, o programa continuará
+rodando até a vida do jogador chegar a zero.
 
 ---
 
