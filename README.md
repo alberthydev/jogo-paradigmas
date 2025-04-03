@@ -1,12 +1,15 @@
 # 🥊 BOXERS  
-**Um jogo de luta 2D desenvolvido em C, simples e direto, com interface em ASCII no terminal.**  
+Um jogo de luta 2D desenvolvido em C, simples e direto, com interface em ASCII no terminal.
 
 ---
 
 ## 📌 SOBRE O PROJETO  
-Uma vez instalado, seu terminal se tornará o ambiente da luta!  
-Com comandos básicos e uma jogabilidade desafiadora, você enfrentará um adversário feroz.  
-⚠️ **Use a defesa com sabedoria... ou será nocauteado!**  
+O projeto visa criar um jogo simplificado, utilizando uma linguagem estruturada para emular uma luta de boxe, a linaguagem
+C, também utilizamos uma biblioteca bem conhecida para lidar com as atualizações do terminal, **ncurses**, desenvolvida nos anos
+80 e posteriormente aprimorada nos anos 90, é amplamente utilizada para deixar o terminal mais intuitivo, permite inputs
+diretos do cliente, cores, atualizações na tela, desenho, etc... Para nosso projeto, ela lida com os sprites dinamicamente,
+para dar um senso de animação, e para ler as teclas pressionadas enquanto o jogo roda, a partir do momento que a luta começa,
+se o jogador não pressionar as teclas de defesa ou ataque, o programa continuará rodando até a vida do jogador chegar a zero.
 
 ---
 
@@ -17,7 +20,9 @@ Com comandos básicos e uma jogabilidade desafiadora, você enfrentará um adver
 ---
 
 ## 🎯 OBJETIVO  
-*Em breve...*  
+Uma vez compilado, seu terminal se tornará o ambiente da luta!  
+Com comandos básicos e uma jogabilidade desafiadora, você enfrentará um adversário feroz.  
+⚠️ **Use a defesa com sabedoria... ou será nocauteado!**  
 
 ---
 
@@ -64,7 +69,8 @@ gcc main.c -o boxers -lncurses
 ---
 
 ## 🛠️ FERRAMENTAS UTILIZADAS  
-*Em breve...*  
+Biblioteca NCurses
+GCC
 
 ---
 
@@ -89,7 +95,7 @@ Durante a luta, utilize os seguintes comandos:
 ## 🤝 CONTRIBUIÇÃO/DESENVOLVIMENTO  
 
 ### 📝 COMO CONTRIBUIR  
-*Em breve...*  
+Se deseja implementar alguma feature nova, basta desenvolver e dar um pull request que vamos avalia-lo e permiti-lo!
 
 ### 🐛 RELATAR PROBLEMA  
 Se encontrou algum bug, abra uma issue [aqui](https://github.com/alberthydev/jogo-paradigmas/issues). 
@@ -103,4 +109,4 @@ Se encontrou algum bug, abra uma issue [aqui](https://github.com/alberthydev/jog
 ---
 
 ## 🖼️ GALERIA  
-*Em breve...*  
+
