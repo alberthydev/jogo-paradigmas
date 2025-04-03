@@ -1,4 +1,4 @@
-# 🥊 JOGO DE PARADIGMAS - BOXERS  
+# 🥊 BOXERS  
 **Um jogo de luta 2D desenvolvido em C, simples e direto, com interface em ASCII no terminal.**  
 
 ---
