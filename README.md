@@ -54,6 +54,7 @@ git clone https://github.com/alberthydev/jogo-paradigmas.git
 cd jogo-paradigmas
 gcc main.c -o boxers -lncurses
 ```
+---
 
 ## ▶️ Executando o jogo
 ```
