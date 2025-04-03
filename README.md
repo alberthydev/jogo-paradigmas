@@ -22,7 +22,43 @@ Com comandos básicos e uma jogabilidade desafiadora, você enfrentará um adver
 ---
 
 ## 📥 COMO INSTALAR  
-*Em breve...*  
+### Arch
+```
+sudo pacman -S ncurses
+git clone https://github.com/alberthydev/jogo-paradigmas.git
+cd jogo-paradigmas
+gcc main.c -o boxers -lncurses
+```
+
+### Ubuntu/Debian
+```
+sudo apt update
+sudo apt install libncurses-dev
+git clone https://github.com/alberthydev/jogo-paradigmas.git
+cd jogo-paradigmas
+gcc main.c -o boxers -lncurses
+```
+
+### Fedora
+```
+sudo dnf install ncurses-devel
+git clone https://github.com/alberthydev/jogo-paradigmas.git
+cd jogo-paradigmas
+gcc main.c -o boxers -lncurses
+```
+
+### openSUSE
+```
+sudo zypper install ncurses-devel
+git clone https://github.com/alberthydev/jogo-paradigmas.git
+cd jogo-paradigmas
+gcc main.c -o boxers -lncurses
+```
+
+## ▶️ Executando o jogo
+```
+./boxers
+```
 
 ---
 
