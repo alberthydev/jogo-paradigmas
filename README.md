@@ -92,7 +92,7 @@ Durante a luta, utilize os seguintes comandos:
 *Em breve...*  
 
 ### 🐛 RELATAR PROBLEMA  
-Se encontrou algum bug, abra uma issue [aqui](https://github.com/alberthydev/jogo-paradigmas/issues/new). 
+Se encontrou algum bug, abra uma issue [aqui](https://github.com/alberthydev/jogo-paradigmas/issues). 
 
 ---
 
