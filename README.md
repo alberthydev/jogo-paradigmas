@@ -63,6 +63,11 @@ gcc main.c -o boxers -lncurses
 ---
 
 ## ▶️ Executando o jogo
+Entre na pasta do projeto
+```
+cd jogo-paradigmas
+```
+Para executar o projeto, depois de compilado, digite o seguinte comando:
 ```
 ./boxers
 ```
