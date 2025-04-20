@@ -8,6 +8,9 @@ from sprites import (
     player_punch_1, player_punch_2, player_punch_3, player_punch_4,
     opponent_punch_1, opponent_punch_2, opponent_punch_3, opponent_punch_4
 )
+from sound import play_music, stop_music, play_sound
+
+GLOBAL_TIME = 0.4
 
 class Fight:
     def __init__(self, stdscr):
@@ -21,69 +24,18 @@ class Fight:
             fight_sprite_1(self.stdscr)
             health_bar(self.stdscr, self.player.health, self.opponent.health)
             self.stdscr.refresh()
-            time.sleep(0.5)
+            time.sleep(GLOBAL_TIME)
             self.stdscr.clear()
             fight_sprite_2(self.stdscr)
             health_bar(self.stdscr, self.player.health, self.opponent.health)
             self.stdscr.refresh()
-            time.sleep(0.5)
-
-    def animate_player_attack(self, opponent_defended):
-        if opponent_defended:
-            self.stdscr.clear()
-            player_punch_4(self.stdscr)  # Defesa do oponente
-            health_bar(self.stdscr, self.player.health, self.opponent.health)
-            self.stdscr.refresh()
-            time.sleep(0.5)
-        else:
-            for sprite in [player_punch_1, player_punch_2, player_punch_3]:
-                self.stdscr.clear()
-                sprite(self.stdscr)
-                health_bar(self.stdscr, self.player.health, self.opponent.health)
-                self.stdscr.refresh()
-                time.sleep(0.5)
-            
-            self.stdscr.clear()
-            health_bar(self.stdscr, self.player.health, self.opponent.health)
-            self.stdscr.refresh()
-            time.sleep(0.5)
-
-    def animate_opponent_attack(self):
-        # Captura defesa do player durante o segundo sprite
-        player_defended = False
-        self.stdscr.clear()
-        opponent_punch_1(self.stdscr)
-        health_bar(self.stdscr, self.player.health, self.opponent.health)
-        self.stdscr.refresh()
-        time.sleep(0.5)
-        self.stdscr.clear()
-        opponent_punch_2(self.stdscr)
-        health_bar(self.stdscr, self.player.health, self.opponent.health)
-        self.stdscr.refresh()
-        # Limpa o buffer antes de capturar o input para evitar defesa automática
-        curses.flushinp()
-        start = time.time()
-        while time.time() - start < 0.5:
-            k = self.stdscr.getch()
-            if k == ord('1'):
-                player_defended = True
-                break
-            time.sleep(0.01)
-        # Defesa ou acerto
-        self.stdscr.clear()
-        if player_defended:
-            opponent_punch_4(self.stdscr)  # Defesa do player
-        else:
-            opponent_punch_3(self.stdscr)  # Player levou o golpe
-        health_bar(self.stdscr, self.player.health, self.opponent.health)
-        self.stdscr.refresh()
-        time.sleep(0.5)
-        return player_defended
+            time.sleep(GLOBAL_TIME)
 
     def run(self):
+        play_music("track1.mp3")  # Só o nome do arquivo
         # Configura o modo não bloqueante para o loop principal
         self.stdscr.nodelay(True)
-        opponent_attack_timer = random.randint(3, 8)
+        opponent_attack_timer = int(random.uniform(2, 8))
         sprite = 0
         while self.player.is_alive() and self.opponent.is_alive():
             # Alterna sprites de luta
@@ -96,35 +48,34 @@ class Fight:
                 sprite = 0
             health_bar(self.stdscr, self.player.health, self.opponent.health)
             self.stdscr.refresh()
-            time.sleep(0.5)
+            time.sleep(GLOBAL_TIME)
 
             # Ataque do oponente se timer chegar a zero
             opponent_attack_timer -= 1
             if opponent_attack_timer <= 0:
-                # Chama animação e captura defesa do player
-                player_defended = self.animate_opponent_attack()
-                if not player_defended:
-                    self.opponent.attack(self.player)
-                opponent_attack_timer = random.randint(3, 8)
+                # Ataque do oponente, lógica de defesa será tratada no método attack
+                self.opponent.attack(self.player, stdscr=self.stdscr)
+                opponent_attack_timer = int(random.uniform(2, 8))
 
-            # Input do jogador (não bloqueante)
+            # Input do jogador
             key = self.stdscr.getch()
             if key == ord('2'):
-                opponent_defended = (random.randint(0, 2) == 0)
-                self.animate_player_attack(opponent_defended)
-                if not opponent_defended:
-                    self.player.attack(self.opponent)
-            elif key == ord('1'):
-                self.player.defend()
+                opponent_defended = (random.random() < 0.3)  # 30% de chance de defesa
+                self.player.attack(self.opponent, stdscr=self.stdscr, defended=opponent_defended)
+                curses.flushinp()  # Limpa o buffer de entrada para evitar spam
             elif key in (ord('q'), ord('Q')):
                 break
             time.sleep(0.05)
         self.stdscr.nodelay(False)
+        stop_music()
         # Exibe vitória ou derrota com sprite
+        if self.player.is_alive() and self.opponent.is_alive():
+            # Saiu pelo 'q', não mostra vitória/derrota
+            return
         self.stdscr.clear()
         if self.player.is_alive():
             victory(self.stdscr)
         else:
             defeat(self.stdscr)
         self.stdscr.refresh()
-        time.sleep(2)
+        time.sleep(GLOBAL_TIME)
