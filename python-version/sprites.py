@@ -90,8 +90,7 @@ def how_to_play(stdscr):
 
 def health_bar(stdscr, player_health, opponent_health):
     # Sprite da barra de vida
-    stdscr.addstr(10, 0, "; PLAYER: " + "S2 " * player_health + "  " * (3 - player_health))
-    stdscr.addstr(11, 0, "; OPONENTE: " + "S2 " * opponent_health + "  " * (3 - opponent_health))
+    stdscr.addstr(0, 0, f"PLAYER: {player_health}   OPONENTE: {opponent_health}")
 
 def fight_sprite_1(stdscr):
     lines = [
