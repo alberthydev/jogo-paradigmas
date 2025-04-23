@@ -12,6 +12,7 @@ from sound import play_music, stop_music, play_sound
 
 GLOBAL_TIME = 0.4
 
+
 class Fight:
     def __init__(self, stdscr):
         self.stdscr = stdscr
@@ -60,8 +61,10 @@ class Fight:
             # Input do jogador
             key = self.stdscr.getch()
             if key == ord('2'):
-                opponent_defended = (random.random() < 0.3)  # 30% de chance de defesa
-                self.player.attack(self.opponent, stdscr=self.stdscr, defended=opponent_defended)
+                # 30% de chance de defesa
+                opponent_defended = (random.random() < 0.3)
+                self.player.attack(
+                    self.opponent, stdscr=self.stdscr, defended=opponent_defended)
                 curses.flushinp()  # Limpa o buffer de entrada para evitar spam
             elif key in (ord('q'), ord('Q')):
                 break
@@ -75,7 +78,9 @@ class Fight:
         self.stdscr.clear()
         if self.player.is_alive():
             victory(self.stdscr)
+            time.sleep(1)
         else:
             defeat(self.stdscr)
+            time.sleep(1)
         self.stdscr.refresh()
         time.sleep(GLOBAL_TIME)
