@@ -78,9 +78,7 @@ class Fight:
         self.stdscr.clear()
         if self.player.is_alive():
             victory(self.stdscr)
-            time.sleep(1)
         else:
             defeat(self.stdscr)
-            time.sleep(1)
         self.stdscr.refresh()
-        time.sleep(GLOBAL_TIME)
+        time.sleep(2)
