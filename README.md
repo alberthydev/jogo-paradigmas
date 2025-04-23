@@ -40,7 +40,7 @@ python main.py
 ```
 sudo pacman -S ncurses
 git clone https://github.com/alberthydev/jogo-paradigmas.git
-cd jogo-paradigmas
+cd jogo-paradigmas/c-version
 gcc main.c -o boxers -lncurses
 ./boxers
 ```
@@ -50,7 +50,7 @@ gcc main.c -o boxers -lncurses
 sudo apt update
 sudo apt install libncurses-dev
 git clone https://github.com/alberthydev/jogo-paradigmas.git
-cd jogo-paradigmas
+cd jogo-paradigmas/c-version
 gcc main.c -o boxers -lncurses
 ./boxers
 ```
@@ -59,7 +59,7 @@ gcc main.c -o boxers -lncurses
 ```
 sudo dnf install ncurses-devel
 git clone https://github.com/alberthydev/jogo-paradigmas.git
-cd jogo-paradigmas
+cd jogo-paradigmas/c-version
 gcc main.c -o boxers -lncurses
 ./boxers
 ```
@@ -68,7 +68,7 @@ gcc main.c -o boxers -lncurses
 ```
 sudo zypper install ncurses-devel
 git clone https://github.com/alberthydev/jogo-paradigmas.git
-cd jogo-paradigmas
+cd jogo-paradigmas/c-version
 gcc main.c -o boxers -lncurses
 ./boxers
 ```
