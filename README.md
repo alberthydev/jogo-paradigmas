@@ -74,7 +74,9 @@ gcc main.c -o boxers -lncurses
 ```
 ---
 
-## 🛠️ FERRAMENTAS UTILIZADAS  
+## 🛠️ FERRAMENTAS UTILIZADAS
+- Python
+- PyGame
 - NCurses
 - GCC
 
