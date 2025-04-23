@@ -28,7 +28,7 @@ Com comandos básicos e uma jogabilidade desafiadora, você enfrentará um adver
 ---
 
 ## 📥 COMO INSTALAR E EXECUTAR  
-### Windows
+### Windows (Aqui você precisa usar a versão em python para poder rodar no windows, linux pode ser usada a versão em C)
 ```
 pip install pygame windows-curses
 git clone https://github.com/alberthydev/jogo-paradigmas.git
@@ -42,6 +42,7 @@ sudo pacman -S ncurses
 git clone https://github.com/alberthydev/jogo-paradigmas.git
 cd jogo-paradigmas
 gcc main.c -o boxers -lncurses
+./boxers
 ```
 
 ### Ubuntu/Debian
@@ -51,6 +52,7 @@ sudo apt install libncurses-dev
 git clone https://github.com/alberthydev/jogo-paradigmas.git
 cd jogo-paradigmas
 gcc main.c -o boxers -lncurses
+./boxers
 ```
 
 ### Fedora
@@ -59,6 +61,7 @@ sudo dnf install ncurses-devel
 git clone https://github.com/alberthydev/jogo-paradigmas.git
 cd jogo-paradigmas
 gcc main.c -o boxers -lncurses
+./boxers
 ```
 
 ### openSUSE
@@ -67,19 +70,8 @@ sudo zypper install ncurses-devel
 git clone https://github.com/alberthydev/jogo-paradigmas.git
 cd jogo-paradigmas
 gcc main.c -o boxers -lncurses
-```
----
-
-## ▶️ Executando o jogo
-Entre na pasta do projeto
-```
-cd jogo-paradigmas
-```
-Para executar o projeto, depois de compilado, digite o seguinte comando:
-```
 ./boxers
 ```
-
 ---
 
 ## 🛠️ FERRAMENTAS UTILIZADAS  
