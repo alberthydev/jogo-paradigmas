@@ -1,5 +1,5 @@
 # 🥊 BOXERS  
-Um jogo de luta 2D desenvolvido em C, simples e direto, com interface em ASCII no terminal.
+Um jogo de luta 2D desenvolvido em C e Python, simples e direto, com interface em ASCII no terminal.
 
 ---
 
@@ -15,8 +15,8 @@ rodando até a vida do jogador chegar a zero.
 ---
 
 ## 🔧 REQUISITOS  
-- Sistema **Linux**  
-- Biblioteca **ncurses**  
+- Sistema **Linux** **Windows**
+- Biblioteca **ncurses**  **pygame**
 
 ---
 
@@ -27,7 +27,15 @@ Com comandos básicos e uma jogabilidade desafiadora, você enfrentará um adver
 
 ---
 
-## 📥 COMO INSTALAR  
+## 📥 COMO INSTALAR E EXECUTAR  
+### Windows
+```
+pip install pygame windows-curses
+git clone https://github.com/alberthydev/jogo-paradigmas.git
+cd jogo-paradigmas/python-version
+python main.py
+```
+
 ### Arch
 ```
 sudo pacman -S ncurses
