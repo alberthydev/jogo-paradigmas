@@ -15,8 +15,8 @@ rodando até a vida do jogador chegar a zero.
 ---
 
 ## 🔧 REQUISITOS  
-- Sistema **Linux** **Windows**
-- Biblioteca **ncurses**  **pygame**
+- Sistema **Linux** e **Windows**
+- Biblioteca **ncurses** e **pygame**
 
 ---
 
