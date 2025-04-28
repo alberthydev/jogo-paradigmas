@@ -33,7 +33,8 @@ class Fight:
             time.sleep(GLOBAL_TIME)
 
     def run(self):
-        play_music("track1.mp3")  # Só o nome do arquivo
+        stop_music()
+        play_music("fightSong.mp3")  # Só o nome do arquivo
         # Configura o modo não bloqueante para o loop principal
         self.stdscr.nodelay(True)
         opponent_attack_timer = int(random.uniform(2, 8))
@@ -77,8 +78,10 @@ class Fight:
             return
         self.stdscr.clear()
         if self.player.is_alive():
+            play_sound("Winner.mp3")
             victory(self.stdscr)
         else:
+            play_sound("Lose.mp3")
             defeat(self.stdscr)
         self.stdscr.refresh()
-        time.sleep(2)
+        time.sleep(4)
