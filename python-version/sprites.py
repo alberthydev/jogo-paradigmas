@@ -1,7 +1,9 @@
 import curses
 
 def draw_menu(stdscr):
-    # Sprite do título
+    """
+    Desenha o sprite do menu principal na tela.
+    """
     menu_lines = [
         "+-------------------------------------------------------------+",
         "|                                                             |",
@@ -34,13 +36,15 @@ def draw_menu(stdscr):
         "|                                                             |",
         "|                                                             |",
         "|                                                             |",
-        "|                                                             |",
         "+-------------------------------------------------------------+"
     ]
     for idx, line in enumerate(menu_lines):
         stdscr.addstr(idx, 0, line)
 
 def draw_interactive_menu(stdscr, highlight):
+    """
+    Desenha as opções do menu e destaca a selecionada.
+    """
     options = ["1 - INICIAR", "2 - COMO JOGAR", "3 - SAIR"]
     start_y = 17
     start_x = 24
@@ -49,7 +53,9 @@ def draw_interactive_menu(stdscr, highlight):
         stdscr.addstr(start_y + idx * 2, start_x, option, mode)
 
 def how_to_play(stdscr):
-    # Sprite do tutorial
+    """
+    Exibe o tutorial de como jogar e espera input para voltar ao menu.
+    """
     tutorial_lines = [
         "+-------------------------------------------------------------+",
         "|                                                             |",
@@ -89,10 +95,15 @@ def how_to_play(stdscr):
     stdscr.getch()
 
 def health_bar(stdscr, player_health, opponent_health):
-    # Sprite da barra de vida
+    """
+    Exibe a barra de vida do jogador e do oponente.
+    """
     stdscr.addstr(0, 0, f"PLAYER: {player_health}   OPONENTE: {opponent_health}")
 
 def fight_sprite_1(stdscr):
+    """
+    Desenha o primeiro sprite da luta.
+    """
     lines = [
         ";                                                              ",
         ";                                         mmmmmmmmmmm          ",
@@ -129,6 +140,9 @@ def fight_sprite_1(stdscr):
         stdscr.addstr(idx, 0, line)
 
 def fight_sprite_2(stdscr):
+    """
+    Desenha o segundo sprite da luta.
+    """
     lines = [
         ";                                                              ",
         ";                                 mmmmmmmmmmm                  ",
@@ -165,6 +179,9 @@ def fight_sprite_2(stdscr):
         stdscr.addstr(idx, 0, line)
 
 def player_punch_1(stdscr):
+    """
+    Sprite do primeiro estágio do ataque do jogador.
+    """
     lines = [
         ";                                                              ",
         ";                                                              ",
@@ -201,6 +218,9 @@ def player_punch_1(stdscr):
         stdscr.addstr(idx, 0, line)
 
 def player_punch_2(stdscr):
+    """
+    Sprite do segundo estágio do ataque do jogador.
+    """
     lines = [
         ";                                                              ",
         ";                                                              ",
@@ -237,6 +257,9 @@ def player_punch_2(stdscr):
         stdscr.addstr(idx, 0, line)
 
 def player_punch_3(stdscr):
+    """
+    Sprite do terceiro estágio do ataque do jogador.
+    """
     lines = [
         ";                                                              ",
         ";                             .....                            ",
@@ -273,42 +296,49 @@ def player_punch_3(stdscr):
         stdscr.addstr(idx, 0, line)
 
 def player_punch_4(stdscr):
+    """
+    Sprite alternativo do ataque do jogador (usado em defesa).
+    """
     lines = [
         ";                                                              ",
         ";                                   .                  ....    ",
         ";  ddd  ddd ddd ddd d  d  dd ddd    .   mmmmmmmmm.m.  .        ",
         ";  d  d d   d   d   dd d d   d   .  .  mmmmmmmmmmmmm.. ...     ",
-        ";  d  d dd  dd  dd  dd d ddd dd  ..  mmmmmmmmmmmmmmmmmmm .  ...",
+        ";  d  d dd  dd  dd  dd d ddd dd  ..  mmmmmmmmmmmmmmmmmmm       ",
         ";  d  d d   d   d   d dd   d d    .  mmmmmmmmmmmmmmmmmm        ",
-        ";  ddd  ddd d   ddd d  d dd  ddd    mmmm       mm.m.m....      ",
-        ";                                qqqqqqq --    qqqqqqqq....    ",
-        ";     !!!!!!!!!!!!!!!!!!!!!    qq      qqq--..qq      qqq .    ",
-        ";                             q q        q  xxxxxxxxxxx q      ",
-        ";          !!!!!!!!!!!!!!     q q        xxxx          xq  ..  ",
-        ";                              q        xx              xq     ",
-        ";                               qq     ox               xqq    ",
-        ";                         ...     qqqqxxx               xx q   ",
-        ";                      ....   ..  q  x   xx              xqq   ",
-        ";                      .     ..   q  x    xx             xqq   ",
-        ";                                qq  x    xxx            xq    ",
-        ";                               qq  qqx     x           xxqq   ",
-        ";                              qq      xx              xx  qq  ",
-        ";                             qq        x             xx       ",
-        ";     xxxxxxxxx                  i      xxx          xx        ",
-        ";   xxx        xx              ii   i   xxx          x         ",
-        ";   xx           x            i   ii    xxxxxx      xx   i     ",
-        ";  xxx            x            i  i     x   xxxxxxxxx    i     ",
-        ";  xx          xxxx          iii       x         xx   i  i     ",
-        ";  xx         xx  x         ii        xx         xx   i  i     ",
-        ";  xx            xx         i     .  xx          x   ii        ",
-        ";  xx          xx               ..  xx          xx        .    ",
-        ";   xxx      xxx                .  xx           xx        .    ",
-        ";    x       x                    xx            x              ",
+        ";  ddd  ddd d   ddd d  d dd  ddd    mmmmmmmmmmmmmmmmmm          ",
+        ";               ...               mmmm       mmmmmmmm          ",
+        ";   ...       ...    ...  ....   mmx ----    ----   m          ",
+        ";     ..     .      ..    .       o  +++--  --+++   o          ",
+        ";      xxxxxxxxxx qqqqqq xxxxxxxxxxx  ++  t  +++    o          ",
+        ";   xxxx         xq    qxx          xx   tt        oo          ",
+        ";  xx             xx   x             xx tttt      oqqqqq       ",
+        ";  x               x  x               x  hhhhhh qqqqqq qq      ",
+        ";  xxxx            x  x            xxxx   hhhh qq     qq q     ",
+        "; xx  xxx          x  x          xxx  xxo     oqq      qqq     ",
+        "; x     x          x  x          x     xoooooooqq      qqq     ",
+        "; xx             xx   xx               x       qqqqqqqqqq      ",
+        ";  xx           xxq    xx             xx          qq    qq     ",
+        ";   xxx         x qqqqqqxx          xxx   ......   qq    qq    ",
+        ";    xx         x qqq   xx          x      ..                  ",
+        ";   xxxxxxxxxxxxxx  qqqqx           xx    .  ... .             ",
+        ";     x        x       xxxxxxxxxxxxxxx     .      ....         ",
+        "; ..  x        x         xx        x        ..                 ",
+        "; ...  xx        x    ..    x        x           ..            ",
+        ";    x        xx     .    x        x             . ..          ",
+        ";    x        x     .     x        xx                ...       ",
+        ";    x        x    ..     x         xx                         ",
+        ";    x        x    .      x          x                         ",
+        ";    x        x           x          x                         ",
+        ";    x        x           x          xx                        ",
     ]
     for idx, line in enumerate(lines):
         stdscr.addstr(idx, 0, line)
 
 def opponent_punch_1(stdscr):
+    """
+    Sprite do primeiro estágio do ataque do oponente.
+    """
     lines = [
         ";                                                              ",
         ";                                                              ",
@@ -345,6 +375,9 @@ def opponent_punch_1(stdscr):
         stdscr.addstr(idx, 0, line)
 
 def opponent_punch_2(stdscr):
+    """
+    Sprite do segundo estágio do ataque do oponente (com aviso).
+    """
     lines = [
         ";                                                              ",
         "; !!!!!CAUTION!!!!!                                            ",
@@ -381,6 +414,9 @@ def opponent_punch_2(stdscr):
         stdscr.addstr(idx, 0, line)
 
 def opponent_punch_3(stdscr):
+    """
+    Sprite do terceiro estágio do ataque do oponente.
+    """
     lines = [
         ";                                                              ",
         ";                                                              ",
@@ -417,6 +453,9 @@ def opponent_punch_3(stdscr):
         stdscr.addstr(idx, 0, line)
 
 def opponent_punch_4(stdscr):
+    """
+    Sprite alternativo do ataque do oponente (usado em defesa).
+    """
     lines = [
         ";                                                              ",
         "; ddd  ddd ddd ddd d  d  dd ddd                                ",
@@ -453,6 +492,9 @@ def opponent_punch_4(stdscr):
         stdscr.addstr(idx, 0, line)
 
 def victory(stdscr):
+    """
+    Exibe o sprite de vitória.
+    """
     lines = [
         ";                                                              ",
         ";                                                              ",
@@ -489,6 +531,9 @@ def victory(stdscr):
         stdscr.addstr(idx, 0, line)
 
 def defeat(stdscr):
+    """
+    Exibe o sprite de derrota.
+    """
     lines = [
         ";                                                              ",
         ";                                                              ",

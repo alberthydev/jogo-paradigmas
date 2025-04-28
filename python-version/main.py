@@ -5,8 +5,11 @@ from sound import play_music, stop_music, play_sound
 
 
 def main(stdscr):
+    """
+    Função principal do jogo, exibe o menu e gerencia a navegação.
+    """
     curses.curs_set(0)
-    highlight = 0
+    highlight = 0  # Índice da opção destacada no menu
     play_music("menuSong.mp3")
     while True:
         stdscr.clear()
@@ -16,12 +19,12 @@ def main(stdscr):
         key = stdscr.getch()
         if key == curses.KEY_UP:
             highlight = (highlight - 1) % 3
-            play_sound("menu2.mp3")
+            play_sound("MenuOption.mp3")
         elif key == curses.KEY_DOWN:
             highlight = (highlight + 1) % 3
-            play_sound("menu2.mp3")
+            play_sound("MenuOption.mp3")
         elif key == ord('\n'):
-            play_sound("Chose.mp3")
+            play_sound("MenuChose.mp3")
             if highlight == 0:
                 stop_music()
                 fight = Fight(stdscr)
@@ -34,4 +37,5 @@ def main(stdscr):
 
 
 if __name__ == "__main__":
+    # Inicia o jogo usando curses
     curses.wrapper(main)

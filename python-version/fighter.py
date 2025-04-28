@@ -7,32 +7,47 @@ from sprites import (
 )
 from sound import play_sound
 
-GLOBAL_TIME = 0.4
+GLOBAL_TIME = 0.4  # Tempo global de animação
 
 
 class Fighter(ABC):
     def __init__(self, name, health=5):
+        """
+        Classe abstrata base para lutadores, define nome e vida.
+        """
         self.name = name
         self.health = health
 
     @abstractmethod
     def attack(self, opponent, stdscr=None, defended=False):
+        """
+        Método abstrato de ataque, deve ser implementado nas subclasses.
+        """
         pass
 
     def is_alive(self):
+        """
+        Retorna True se o lutador ainda está vivo (vida > 0).
+        """
         return self.health > 0
 
 
 class Player(Fighter):
     def attack(self, opponent, stdscr=None, defended=False):
+        """
+        Realiza ataque do jogador, anima e aplica dano se não defendido.
+        """
         self.animate_attack(opponent, stdscr, defended)
         if defended:
-            play_sound("punchTest1.mp3")
+            play_sound("Punch.mp3")
         else:
-            play_sound("defense.mp3")
+            play_sound("Defense.mp3")
             opponent.health -= 1
 
     def animate_attack(self, opponent, stdscr, defended):
+        """
+        Anima o ataque do jogador usando diferentes sprites.
+        """
         if stdscr is None:
             return
         sprites = [player_punch_1, player_punch_2, player_punch_4] if defended else [
@@ -51,16 +66,18 @@ class Player(Fighter):
 
 class Opponent(Fighter):
     def attack(self, opponent, stdscr=None, defended=None):
+        """
+        Realiza ataque do oponente, permite defesa do jogador se stdscr não for None.
+        """
         player_defended = False
         if stdscr is not None:
-            # opponent_punch_1
+            # Animação do ataque do oponente e input para defesa do jogador
             stdscr.clear()
             opponent_punch_1(stdscr)
             health_bar(stdscr, opponent.health, self.health)
             stdscr.refresh()
             time.sleep(GLOBAL_TIME)
 
-            # opponent_punch_2 + input defesa
             stdscr.clear()
             opponent_punch_2(stdscr)
             health_bar(stdscr, opponent.health, self.health)
@@ -79,12 +96,15 @@ class Opponent(Fighter):
 
         self.animate_attack(opponent, stdscr, player_defended)
         if player_defended:
-            play_sound("punchTest1.mp3")
+            play_sound("Punch.mp3")
         else:
-            play_sound("defense.mp3")
+            play_sound("Defense.mp3")
             opponent.health -= 1
 
     def animate_attack(self, opponent, stdscr, defended):
+        """
+        Anima o ataque do oponente usando diferentes sprites.
+        """
         if stdscr is None:
             return
         stdscr.clear()
