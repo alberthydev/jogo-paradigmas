@@ -4,7 +4,7 @@ Um jogo de luta 2D desenvolvido em C e Python, simples e direto, com interface e
 ---
 
 ## 📌 SOBRE O PROJETO  
-O projeto visa criar um jogo simplificado, utilizando a linguagem C para simular uma luta de boxe, para melhor experiência do
+O projeto visa criar um jogo simplificado, simulando uma luta de boxe, para melhor experiência do
 usuário utilizamos uma biblioteca famosa para lidar com as atualizações do terminal, **ncurses**, desenvolvida nos anos 80 e
 posteriormente aprimorada nos anos 90, é amplamente utilizada para deixar o terminal mais intuitivo, permite inputs diretos
 do usuario, cores, atualizações na tela, desenho, etc... Para nosso projeto, ela lida com os sprites sendo alterados
